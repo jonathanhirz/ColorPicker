@@ -217,14 +217,14 @@ class ColorPickCommand(sublime_plugin.TextCommand):
         # get the currently selected color - if any
         if len(sel) > 0:
             selected = self.view.substr(self.view.word(sel[0])).strip()
-            if selected.startswith('#'): selected = selected[1:]
+            if selected.startswith('0xff'): selected = selected[4:]
 
             svg_color_hex = self.SVGColors.get(selected, None)
             if svg_color_hex != None:
                 selected = svg_color_hex
 
             if self.__is_valid_hex_color(selected):
-                start_color = "#" + selected
+                start_color = "0xff" + selected
                 start_color_osx = selected
                 start_color_win = self.__hexstr_to_bgr(selected)
 
@@ -286,13 +286,13 @@ class ColorPickCommand(sublime_plugin.TextCommand):
                 # if the selected word is a valid color, replace it
                 if self.__is_valid_hex_color(self.view.substr(word)):
                     # include '#' if present
-                    if self.view.substr(word.a - 1) == '#':
+                    if self.view.substr(word.a - 1) == '0xff':
                         word = sublime.Region(word.a - 1, word.b)
                     # replace
-                    self.view.replace(edit, word, '#' + color)
+                    self.view.replace(edit, word, '0xff' + color)
                 # otherwise just replace the selected region
                 else:
-                    self.view.replace(edit, region, '#' + color)
+                    self.view.replace(edit, region, '0xff' + color)
 
 
     def __get_pixel(self):
