@@ -1,3 +1,6 @@
+**all this fork does is change the rgb prefix from '#' to '0xff'.
+So it generates codes like 0xffRRGGBB instead of #RRGGBB**
+
 ###Mac OSX
 ![Mac OSX](http://i.minus.com/i5KI6SBAfs7Qk.png "Mac OS X")
 
